@@ -123,9 +123,10 @@
     
     \node [no_border, right = of ACCESS-CM3-g, xshift = \xshift] (ACCESS-CM3-1deg) {1$^\circ$};
     \node [no_border, below = of ACCESS-CM3-1deg] (ACCESS-CM3-025deg) {0.25$^\circ$};
-    \node [no_border, below = of ACCESS-CM3-025deg] (ACCESS-CM3-01deg) {0.1$^\circ$};
+%    \node [no_border, below = of ACCESS-CM3-025deg] (ACCESS-CM3-01deg) {0.1$^\circ$};
 
     \node [no_border, right = of ACCESS-ESM3-g, xshift = \xshift] (ACCESS-ESM3-1deg) {1$^\circ$};
+    \node [no_border, below = of ACCESS-ESM3-1deg] (ACCESS-ESM3-025deg) {0.25$^\circ$};
     
     \node [no_border, right = of MOM6-CICE6-g, xshift = \xshift] (MOM6-CICE6-1deg) {1$^\circ$};
     \node [no_border, below = of MOM6-CICE6-1deg] (MOM6-CICE6-025deg) {0.25$^\circ$};
@@ -144,7 +145,7 @@
     
     % braces
     
-    \draw [decorate,decoration= {brace,amplitude=0.6cm, raise=0.1cm}, ultra thick] (ACCESS-CM3-1deg.north east) -- (ACCESS-ESM3-1deg.south east) node [midway,xshift=1.8cm] (ACCESS-OM3) {for CMIP7};
+    \draw [decorate,decoration= {brace,amplitude=0.6cm, raise=0.1cm}, ultra thick] (ACCESS-CM3-1deg.north east) -- (ACCESS-ESM3-025deg.south east) node [midway,xshift=1.8cm] (ACCESS-OM3) {for CMIP7};
     \draw [decorate,decoration= {brace,amplitude=0.6cm, raise=0.1cm}, ultra thick] (MOM6-CICE6-WW3-1deg.north east) -- (MOM6-CICE6-WW3-004deg.south east) node [midway,xshift=2.8cm] (ACCESS-OM3) {\textbf{ACCESS-OM3 suite}};
     
     % black arrows
@@ -187,9 +188,10 @@
 
     \draw [-{Latex[length=5mm]}, green!60!black, line width=1.5mm] (ACCESS-CM3-b) to (ACCESS-CM3-1deg);
     \draw [-{Latex[length=5mm]}, green!60!black, line width=1.5mm] (ACCESS-CM3-g) to [out=-90, in=180](ACCESS-CM3-025deg);
-    \draw [-{Latex[length=5mm]}, green!60!black, line width=1.5mm] (ACCESS-CM3-g) to [out=-90, in=180](ACCESS-CM3-01deg);
+%    \draw [-{Latex[length=5mm]}, green!60!black, line width=1.5mm] (ACCESS-CM3-g) to [out=-90, in=180](ACCESS-CM3-01deg);
 
     \draw [-{Latex[length=5mm]}, green!60!black, line width=1.5mm] (ACCESS-ESM3-e) to (ACCESS-ESM3-1deg);
+    \draw [-{Latex[length=5mm]}, green!60!black, line width=1.5mm] (ACCESS-ESM3-g) to [out=-90, in=180](ACCESS-ESM3-025deg);
 
     \draw [-{Latex[length=5mm]}, green!60!black, line width=1.5mm] (MOM6-CICE6) to (MOM6-CICE6-1deg);
     \draw [-{Latex[length=5mm]}, green!60!black, line width=1.5mm] (MOM6-CICE6-f) to [out=-90, in=180](MOM6-CICE6-025deg);
