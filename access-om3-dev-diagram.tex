@@ -1,0 +1,207 @@
+\documentclass[landscape]{article}
+
+%% Language and font encodings
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+
+%% Sets page size and margins
+\usepackage[a3paper,top=1.5cm,bottom=1cm,left=1.5cm,right=1.5cm,marginparwidth=1.75cm]{geometry}
+
+%%% Useful packages
+%\usepackage{amsmath}
+%\usepackage{graphicx}
+%\usepackage[colorinlistoftodos]{todonotes}
+%\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+\usepackage{tikz}
+%%\usetikzlibrary{mindmap,trees}
+%%\usetikzlibrary{arrows,backgrounds}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{positioning,fit,shapes, decorations}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{calc}
+%%\usetikzlibrary{er}
+%%\usetikzlibrary{petri}
+
+\begin{document}
+
+\pagenumbering{gobble}
+\title{Scenario 3}
+%\date{}
+%\maketitle
+
+
+%\pagestyle{empty}
+
+
+% Define block styles
+\tikzstyle{block} = [rectangle, draw, thick, fill=white, text width=3.5cm, text centered, rounded corners, minimum height=4.5em]
+\tikzstyle{no_border_block} = [rectangle, fill=none, text width=3.5cm, text centered, rounded corners, minimum height=4.5em]
+\tikzstyle{no_border} = [rectangle, fill=none]
+%\tikzstyle{line} = [draw, -latex']
+%\tikzstyle{line} = [draw, -{Latex[length=5mm]}, ultra thick]
+
+\newcommand{\vertdist}{0.4cm} % vertical spacing between nodes
+\newcommand{\horzdist}{1cm} % horizontal spacing between nodes
+\newcommand{\xshift}{12mm} % horizontal shift between (most) branch points 
+\newcommand{\xshiftsmall}{0.1\xshift} % smaller horizontal shift between some branch points 
+\newcommand{\knot}{}  % change to {X} to see the available branch/merge points
+
+\begin{tikzpicture}[node distance = \vertdist,font=\large\sffamily]
+    
+    % leftmost nodes
+    
+    \node [block] (UM-CABLE) {UM-CABLE}; % with NUOPC cap};
+    \node [no_border_block, below = of UM-CABLE] (ACCESS-CM3) {\phantom{ACCESS-CM3}};
+    \node [no_border_block, below = of ACCESS-CM3, yshift =-1cm] (ACCESS-ESM3) {\phantom{ACCESS-ESM3}};
+    \node [block, below = of ACCESS-ESM3] (MOM6-CICE6) {MOM6-CICE6};
+    \node [block, below = of MOM6-CICE6.west, xshift=-2cm, yshift=-1cm] (CESM) {CESM MOM6, CICE6, WW3 code versions};
+    \node [block, below = of CESM.east, xshift=2cm, yshift=-1cm] (MOM6-CICE6-WW3) {MOM6-CICE6-WW3};
+    \node [block, below = of MOM6-CICE6-WW3, yshift=-1cm] (CICE6-WW3) {CICE6-WW3};
+    
+    % define branch/merge points
+
+    \node [no_border, right = of                         UM-CABLE  , xshift = \xshiftsmall]                         (UM-CABLE-a) {\knot};
+    \node [no_border, right = of          ACCESS-CM3  , xshift = \xshiftsmall]           (ACCESS-CM3-a) {\knot};
+    \node [no_border, right = of        ACCESS-ESM3  , xshift = \xshiftsmall]         (ACCESS-ESM3-a) {\knot};
+    \node [no_border, right = of                       CESM  , xshift = \xshift]                         (CESM-a) {\knot};
+    \node [no_border, right = of           MOM6-CICE6  , xshift = \xshiftsmall]           (MOM6-CICE6-a) {\knot};
+    \node [no_border, right = of MOM6-CICE6-WW3  , xshift = \xshiftsmall] (MOM6-CICE6-WW3-a) {\knot};
+    \node [no_border, right = of             CICE6-WW3  , xshift = \xshiftsmall]             (CICE6-WW3-a) {\knot};
+    
+    \node [no_border, right = of                         UM-CABLE-a, xshift = \xshift]                         (UM-CABLE-b) {\knot};
+    \node [block, right = of          ACCESS-CM3-a, xshift = \xshift]           (ACCESS-CM3-b) {ACCESS-CM3};
+    \node [no_border, right = of        ACCESS-ESM3-a, xshift = \xshift]        (ACCESS-ESM3-b) {\knot};
+    \node [no_border, right = of                       CESM-a, xshift = \xshift]                       (CESM-b) {\knot};
+    \node [no_border, right = of           MOM6-CICE6-a, xshift = \xshift]           (MOM6-CICE6-b) {\knot};
+    \node [no_border, right = of MOM6-CICE6-WW3-a, xshift = \xshift] (MOM6-CICE6-WW3-b) {\knot};
+    \node [no_border, right = of             CICE6-WW3-a, xshift = \xshift]             (CICE6-WW3-b) {\knot};
+
+    \node [no_border, right = of                         UM-CABLE-b, xshift = \xshift]                         (UM-CABLE-c) {\knot};
+    \node [no_border, right = of          ACCESS-CM3-b, xshift = \xshiftsmall]  (ACCESS-CM3-c) {\knot};
+    \node [no_border, right = of        ACCESS-ESM3-b, xshift = \xshift]        (ACCESS-ESM3-c) {\knot};
+    \node [no_border, right = of                       CESM-b, xshift = \xshift]                       (CESM-c) {\knot};
+    \node [no_border, right = of           MOM6-CICE6-b, xshift = \xshift]           (MOM6-CICE6-c) {\knot};
+    \node [no_border, right = of MOM6-CICE6-WW3-b, xshift = \xshift] (MOM6-CICE6-WW3-c) {\knot};
+    \node [no_border, right = of             CICE6-WW3-b, xshift = \xshift]             (CICE6-WW3-c) {\knot};
+
+    \node [no_border, right = of                         UM-CABLE-c, xshift = \xshift]                         (UM-CABLE-d) {\knot};
+    \node [no_border, right = of          ACCESS-CM3-c, xshift = \xshift]           (ACCESS-CM3-d) {\knot};
+    \node [no_border, right = of        ACCESS-ESM3-c, xshift = \xshift]        (ACCESS-ESM3-d) {\knot};
+    \node [no_border, right = of                       CESM-c, xshift = \xshift]                       (CESM-d) {\knot};
+    \node [no_border, right = of           MOM6-CICE6-c, xshift = \xshift]           (MOM6-CICE6-d) {\knot};
+    \node [no_border, right = of MOM6-CICE6-WW3-c, xshift = \xshift] (MOM6-CICE6-WW3-d) {\knot};
+    \node [no_border, right = of             CICE6-WW3-c, xshift = \xshift]             (CICE6-WW3-d) {\knot};
+
+    \node [no_border, right = of                         UM-CABLE-d, xshift = \xshift]                         (UM-CABLE-e) {\knot};
+    \node [no_border, right = of          ACCESS-CM3-d, xshift = \xshift]           (ACCESS-CM3-e) {\knot};
+    \node [block, right = of        ACCESS-ESM3-d, xshift = \xshift]        (ACCESS-ESM3-e) {ACCESS-ESM3};
+    \node [no_border, right = of                       CESM-d, xshift = \xshift]                        (CESM-e) {\knot};
+    \node [no_border, right = of           MOM6-CICE6-d, xshift = \xshift]           (MOM6-CICE6-e) {\knot};
+    \node [no_border, right = of MOM6-CICE6-WW3-d, xshift = \xshift] (MOM6-CICE6-WW3-e) {\knot};
+    \node [no_border, right = of             CICE6-WW3-d, xshift = \xshift]             (CICE6-WW3-e) {\knot};
+
+    \node [no_border, right = of                         UM-CABLE-e, xshift = \xshift]                         (UM-CABLE-f) {\knot};
+    \node [no_border, right = of          ACCESS-CM3-e, xshift = \xshift]           (ACCESS-CM3-f) {\knot};
+    \node [no_border, right = of        ACCESS-ESM3-e, xshift = \xshiftsmall]        (ACCESS-ESM3-f) {\knot};
+    \node [no_border, right = of                       CESM-e, xshift = \xshift]                       (CESM-f) {\knot};
+    \node [no_border, right = of           MOM6-CICE6-e, xshift = \xshift]           (MOM6-CICE6-f) {\knot};
+    \node [no_border, right = of MOM6-CICE6-WW3-e, xshift = \xshift] (MOM6-CICE6-WW3-f) {\knot};
+    \node [no_border, right = of             CICE6-WW3-e, xshift = \xshift]             (CICE6-WW3-f) {\knot};
+
+%    \node [no_border, right = of                         UM-CABLE-f, xshift = \xshift]                         (UM-CABLE-g) {?};
+%    \node [no_border, right = of          ACCESS-CM3-f, xshift = \xshift]           (ACCESS-CM3-g) {\textbf{ACCESS-CM3}};
+    \node [no_border, right = of          ACCESS-CM3-f, xshift = \xshift]           (ACCESS-CM3-g) {\knot};
+    \node [no_border, right = of        ACCESS-ESM3-f, xshift = \xshift]        (ACCESS-ESM3-g) {\knot};
+    \node [no_border, right = of                       CESM-f, xshift = \xshift]                       (CESM-g) {\knot};
+    \node [no_border, right = of           MOM6-CICE6-f, xshift = \xshift]           (MOM6-CICE6-g) {\knot};
+    \node [no_border, right = of MOM6-CICE6-WW3-f, xshift = \xshift] (MOM6-CICE6-WW3-g) {\knot};
+%    \node [no_border, right = of             CICE6-WW3-f, xshift = \xshift]             (CICE6-WW3-g) {?};
+    
+    % different resolutions
+    
+    \node [no_border, right = of ACCESS-CM3-g, xshift = \xshift] (ACCESS-CM3-1deg) {1$^\circ$};
+    \node [no_border, below = of ACCESS-CM3-1deg] (ACCESS-CM3-025deg) {0.25$^\circ$};
+    \node [no_border, below = of ACCESS-CM3-025deg] (ACCESS-CM3-01deg) {0.1$^\circ$};
+
+    \node [no_border, right = of ACCESS-ESM3-g, xshift = \xshift] (ACCESS-ESM3-1deg) {1$^\circ$};
+    
+    \node [no_border, right = of MOM6-CICE6-g, xshift = \xshift] (MOM6-CICE6-1deg) {1$^\circ$};
+    \node [no_border, below = of MOM6-CICE6-1deg] (MOM6-CICE6-025deg) {0.25$^\circ$};
+    \node [no_border, below = of MOM6-CICE6-025deg] (MOM6-CICE6-01deg) {0.1$^\circ$};
+    \node [no_border, below = of MOM6-CICE6-01deg] (MOM6-CICE6-004deg) {0.04$^\circ$};
+    
+    \node [no_border, right = of MOM6-CICE6-WW3-g, xshift = \xshift] (MOM6-CICE6-WW3-1deg) {1$^\circ$};
+    \node [no_border, below = of MOM6-CICE6-WW3-1deg] (MOM6-CICE6-WW3-025deg) {0.25$^\circ$};
+    \node [no_border, below = of MOM6-CICE6-WW3-025deg] (MOM6-CICE6-WW3-01deg) {0.1$^\circ$};
+    \node [no_border, below = of MOM6-CICE6-WW3-01deg] (MOM6-CICE6-WW3-004deg) {0.04$^\circ$};
+    
+    % little labels
+    
+    \node [no_border, below = of MOM6-CICE6-c, xshift=5mm, yshift=5mm] (C-grid) {C-grid};
+    \node [no_border, below = of MOM6-CICE6-e, yshift=5mm] (BGC) {BGC};
+    
+    % braces
+    
+    \draw [decorate,decoration= {brace,amplitude=0.6cm, raise=0.1cm}, ultra thick] (ACCESS-CM3-1deg.north east) -- (ACCESS-ESM3-1deg.south east) node [midway,xshift=1.8cm] (ACCESS-OM3) {for CMIP7};
+    \draw [decorate,decoration= {brace,amplitude=0.6cm, raise=0.1cm}, ultra thick] (MOM6-CICE6-WW3-1deg.north east) -- (MOM6-CICE6-WW3-004deg.south east) node [midway,xshift=2.8cm] (ACCESS-OM3) {\textbf{ACCESS-OM3 suite}};
+    
+    % black arrows
+    
+    \draw [-{Latex[length=5mm]}, black, line width=1.5mm] (CESM) to (CESM-f);
+
+    \draw [-{Latex[length=5mm]}, ultra thick] (CESM.east) to [out=0, in=-90] (MOM6-CICE6.south);
+    \draw [-{Latex[length=5mm]}, ultra thick] (CESM.east) to [out=0, in=90] (MOM6-CICE6-WW3.north);
+    \draw [-{Latex[length=5mm]}, ultra thick] (CESM-c) to [out=0, in=-90] (MOM6-CICE6-b);
+    \draw [-{Latex[length=5mm]}, ultra thick] (CESM-c) to [out=0, in=90] (MOM6-CICE6-WW3-b);
+    \draw [-{Latex[length=5mm]}, ultra thick] (CESM-e) to [out=0, in=-90] (MOM6-CICE6-d);
+    \draw [-{Latex[length=5mm]}, ultra thick] (CESM-e) to [out=0, in=90] (MOM6-CICE6-WW3-d);
+    \draw [-{Latex[length=5mm]}, ultra thick] (MOM6-CICE6-WW3.south) to (CICE6-WW3.north);
+    \draw [-{Latex[length=5mm]}, ultra thick] (UM-CABLE-a) to [out=0, in=90] (ACCESS-CM3-b.north);
+    \draw [-{Latex[length=5mm]}, ultra thick] (UM-CABLE-b) to [out=0, in=90] (ACCESS-CM3-c);
+    \draw [-{Latex[length=5mm]}, ultra thick] (UM-CABLE-c) to [out=0, in=90] (ACCESS-CM3-d);
+    \draw [-{Latex[length=5mm]}, ultra thick] (MOM6-CICE6-a) to [out=0, in=-90] (ACCESS-CM3-b.south);
+    \draw [-{Latex[length=5mm]}, ultra thick] (MOM6-CICE6-b) to [out=0, in=-90] (ACCESS-CM3-c);
+    \draw [-{Latex[length=5mm]}, ultra thick] (MOM6-CICE6-c) to [out=0, in=-120] (ACCESS-CM3-d);
+    \draw [-{Latex[length=5mm]}, ultra thick] (ACCESS-CM3-d) to [out=0, in=90] (ACCESS-ESM3-e.north);
+    \draw [-{Latex[length=5mm]}, ultra thick] (ACCESS-CM3-e) to [out=0, in=90] (ACCESS-ESM3-f);
+    \draw [-{Latex[length=5mm]}, ultra thick] (MOM6-CICE6-e) to [out=0, in=-90] (ACCESS-ESM3-f);
+%    \draw [-{Latex[length=5mm]}, ultra thick] (MOM6-CICE6-d) to [out=0, in=-90] (ACCESS-CM3-e);
+    \draw [-{Latex[length=5mm]}, ultra thick] (MOM6-CICE6-d) to [out=0, in=-90] (ACCESS-ESM3-e.south);
+%    \draw [-{Latex[length=5mm]}, ultra thick] (MOM6-CICE6-a) to [out=0, in=90] (MOM6-CICE6-WW3-b);
+    \draw [-{Latex[length=5mm]}, ultra thick] (MOM6-CICE6-b) to [out=0, in=90] (MOM6-CICE6-WW3-c);
+%    \draw [-{Latex[length=5mm]}, ultra thick] (MOM6-CICE6-c) to [out=0, in=90] (MOM6-CICE6-WW3-d);
+    \draw [-{Latex[length=5mm]}, ultra thick] (MOM6-CICE6-d) to [out=0, in=90] (MOM6-CICE6-WW3-e);
+    \draw [-{Latex[length=5mm]}, ultra thick] (MOM6-CICE6-e) to [out=0, in=90] (MOM6-CICE6-WW3-f);
+    \draw [-{Latex[length=5mm]}, ultra thick] (CICE6-WW3-a) to [out=0, in=-90] (MOM6-CICE6-WW3-b);
+    \draw [-{Latex[length=5mm]}, ultra thick] (MOM6-CICE6-WW3-b) to [out=0, in=90] (CICE6-WW3-c);
+    \draw [-{Latex[length=5mm]}, ultra thick] (CICE6-WW3-c) to [out=0, in=-90] (MOM6-CICE6-WW3-d);
+    \draw [-{Latex[length=5mm]}, ultra thick] (CICE6-WW3-d) to [out=0, in=-90] (MOM6-CICE6-WW3-e);
+
+    % green arrows
+
+    \draw [-{Latex[length=5mm]}, green!60!black, line width=1.5mm] (UM-CABLE) to (UM-CABLE-f);
+%    \draw [-{Latex[length=5mm]}, green!60!black, line width=1.5mm] (ACCESS-CM3-b) to (ACCESS-CM3-g);
+    \draw [-{Latex[length=5mm]}, green!60!black, line width=1.5mm] (CICE6-WW3) to (CICE6-WW3-f);
+
+    \draw [-{Latex[length=5mm]}, green!60!black, line width=1.5mm] (ACCESS-CM3-b) to (ACCESS-CM3-1deg);
+    \draw [-{Latex[length=5mm]}, green!60!black, line width=1.5mm] (ACCESS-CM3-g) to [out=-90, in=180](ACCESS-CM3-025deg);
+    \draw [-{Latex[length=5mm]}, green!60!black, line width=1.5mm] (ACCESS-CM3-g) to [out=-90, in=180](ACCESS-CM3-01deg);
+
+    \draw [-{Latex[length=5mm]}, green!60!black, line width=1.5mm] (ACCESS-ESM3-e) to (ACCESS-ESM3-1deg);
+
+    \draw [-{Latex[length=5mm]}, green!60!black, line width=1.5mm] (MOM6-CICE6) to (MOM6-CICE6-1deg);
+    \draw [-{Latex[length=5mm]}, green!60!black, line width=1.5mm] (MOM6-CICE6-f) to [out=-90, in=180](MOM6-CICE6-025deg);
+    \draw [-{Latex[length=5mm]}, green!60!black, line width=1.5mm] (MOM6-CICE6-f) to [out=-90, in=180](MOM6-CICE6-01deg);
+    \draw [-{Latex[length=5mm]}, green!60!black, line width=1.5mm] (MOM6-CICE6-f) to [out=-90, in=180](MOM6-CICE6-004deg);
+%    \draw [->, green!60!black, line width=1.5mm] (MOM6-CICE6-WW3-g) to (MOM6-CICE6-WW3-1deg);
+
+    \draw [-{Latex[length=5mm]}, green!60!black, line width=1.5mm] (MOM6-CICE6-WW3) to (MOM6-CICE6-WW3-1deg);
+    \draw [-{Latex[length=5mm]}, green!60!black, line width=1.5mm] (MOM6-CICE6-WW3-f) to [out=-90, in=180](MOM6-CICE6-WW3-025deg);
+    \draw [-{Latex[length=5mm]}, green!60!black, line width=1.5mm] (MOM6-CICE6-WW3-f) to [out=-90, in=180](MOM6-CICE6-WW3-01deg);
+    \draw [-{Latex[length=5mm]}, green!60!black, line width=1.5mm] (MOM6-CICE6-WW3-f) to [out=-90, in=180](MOM6-CICE6-WW3-004deg);
+
+\end{tikzpicture}
+
+\end{document}
