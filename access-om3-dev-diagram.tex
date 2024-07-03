@@ -135,8 +135,8 @@
     
     \node [no_border, right = of MOM6-CICE6-WW3-g, xshift = \xshift] (MOM6-CICE6-WW3-1deg) {1$^\circ$};
     \node [no_border, below = of MOM6-CICE6-WW3-1deg] (MOM6-CICE6-WW3-025deg) {0.25$^\circ$};
-    \node [no_border, below = of MOM6-CICE6-WW3-025deg] (MOM6-CICE6-WW3-01deg) {0.1$^\circ$};
-    \node [no_border, below = of MOM6-CICE6-WW3-01deg] (MOM6-CICE6-WW3-004deg) {0.04$^\circ$};
+    \node [no_border, below = of MOM6-CICE6-WW3-025deg] (MOM6-CICE6-WW3-01deg) {0.1$^\circ$ ?};
+    \node [no_border, below = of MOM6-CICE6-WW3-01deg] (MOM6-CICE6-WW3-004deg) {0.04$^\circ$ ??};
     
     % little labels
     
@@ -146,7 +146,7 @@
     % braces
     
     \draw [decorate,decoration= {brace,amplitude=0.6cm, raise=0.1cm}, ultra thick] (ACCESS-CM3-1deg.north east) -- (ACCESS-ESM3-025deg.south east) node [midway,xshift=1.8cm] (ACCESS-OM3) {for CMIP7};
-    \draw [decorate,decoration= {brace,amplitude=0.6cm, raise=0.1cm}, ultra thick] (MOM6-CICE6-WW3-1deg.north east) -- (MOM6-CICE6-WW3-004deg.south east) node [midway,xshift=2.8cm] (ACCESS-OM3) {\textbf{ACCESS-OM3 suite}};
+    \draw [decorate,decoration= {brace,amplitude=0.6cm, raise=0.1cm}, ultra thick] (MOM6-CICE6-1deg.north east) -- (MOM6-CICE6-WW3-004deg.south east) node [midway,xshift=2.8cm] (ACCESS-OM3) {\textbf{ACCESS-OM3 suite}};
     
     % black arrows
     
